@@ -19,7 +19,6 @@ export const Map = () => {
             center: [lng, lat],
             zoom: zoom,
         });
-        console.log(map.current);
     });
 
     return (
