@@ -1,12 +1,10 @@
-import 'AppS.scss';
-
-
+import { Map } from "../Map/Map";
+import "./AppS.scss";
 
 export const App = () => {
-  return (<div className='App'>
-
-
-
-  </div>)
-
-}
+    return (
+        <div className="App">
+            <Map />
+        </div>
+    );
+};
