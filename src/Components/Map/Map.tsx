@@ -1,19 +1,15 @@
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { useContext, useEffect, useRef } from "react";
-
-import { MyMapObjectContext } from "../Context/MapObjectContext";
-import { MyMapCamContext } from "../Context/MyMapCamContextProvider";
+import { useContext, useEffect } from "react";
+import { MapObjectContext } from "../Context/MapObjectContext";
 import "./MapS.scss";
 import { token } from "./token";
 
 mapboxgl.accessToken = token;
 
 export const Map = () => {
-    const mapContainer = useRef(null) as any;
-    const map = useRef(null) as any;
-    const { zoom, lng, lat } = useContext(MyMapCamContext);
-    const { setMap } = useContext(MyMapObjectContext);
+    const { map, mapContainer, camControls } = useContext(MapObjectContext);
+    const { lng, lat, zoom } = camControls;
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -23,15 +19,7 @@ export const Map = () => {
             center: [lng, lat],
             zoom: zoom,
         });
-
-        new mapboxgl.Marker({
-            color: "red",
-            draggable: true,
-        })
-            .setLngLat([lng, lat])
-            .addTo(map.current);
-
-        setMap(map.current);
+        console.log(map.current);
     });
 
     return (

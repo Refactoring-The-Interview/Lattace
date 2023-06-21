@@ -1,38 +1,48 @@
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useRef, useState } from "react";
 
 import { token } from "../Map/token";
+import { useCamControls } from "./useCamControls";
 mapboxgl.accessToken = token;
 
-interface MyMapObjectContext {
+interface MapObjectContextValues {
     map: any;
-    setMap(map: any): void;
+    mapContainer: any;
+    camControls: any;
+    markers: any;
+    setMarkers(markers: any): void;
 }
 
-export const MyMapObjectContext = createContext<MyMapObjectContext>({
-    map: {},
-    setMap: () => {},
+export const MapObjectContext = createContext<MapObjectContextValues>({
+    map: null,
+    mapContainer: null,
+    markers: [],
+    camControls: () => {},
+    setMarkers: () => {},
 });
 
 interface Props {
     children: ReactNode;
 }
 
-export const MapObjectContext = ({ children }: Props) => {
-    const [map, setMap] = useState<any>(null);
+export const MapObjectContextProvider = ({ children }: Props) => {
+    const map = useRef(null);
+    const mapContainer = useRef(null);
+    const camControls = useCamControls();
+    const [markers, setMarkers] = useState<any>([]);
 
-    useEffect(() => {
-        console.log(map);
-    }, [map, setMap]);
     return (
-        <MyMapObjectContext.Provider
+        <MapObjectContext.Provider
             value={{
                 map,
-                setMap,
+                mapContainer,
+                camControls,
+                markers,
+                setMarkers,
             }}
         >
-            {children}
-        </MyMapObjectContext.Provider>
+            <>{children}</>
+        </MapObjectContext.Provider>
     );
 };
