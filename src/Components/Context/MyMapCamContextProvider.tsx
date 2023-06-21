@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useState } from "react";
 
-interface MapContext {
+interface MapCamContext {
     lng: number;
     lat: number;
     zoom: number;
@@ -9,7 +9,7 @@ interface MapContext {
     setZoom(newZoom: number): void;
 }
 
-export const MyMapContext = createContext<MapContext>({
+export const MyMapCamContext = createContext<MapCamContext>({
     lng: -70.9,
     lat: 42.35,
     zoom: 9,
@@ -22,13 +22,13 @@ interface Props {
     children: ReactNode;
 }
 
-export const MyMapContextProvider = ({ children }: Props) => {
+export const MyMapCamContextProvider = ({ children }: Props) => {
     const [lng, setLng] = useState(-70.9);
     const [lat, setLat] = useState(42.35);
     const [zoom, setZoom] = useState(9);
 
     return (
-        <MyMapContext.Provider
+        <MyMapCamContext.Provider
             value={{
                 lng,
                 lat,
@@ -39,6 +39,6 @@ export const MyMapContextProvider = ({ children }: Props) => {
             }}
         >
             {children}
-        </MyMapContext.Provider>
+        </MyMapCamContext.Provider>
     );
 };
