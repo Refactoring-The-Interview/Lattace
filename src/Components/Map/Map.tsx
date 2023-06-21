@@ -17,7 +17,7 @@ export const Map = () => {
         else {
             map.current = new mapboxgl.Map({
                 container: mapContainer.current,
-                style: "mapbox://styles/mapbox/streets-v12",
+                style: "mapbox://styles/mapbox/satellite-v9",
                 center: [lng, lat],
                 zoom: zoom,
             });
@@ -25,7 +25,7 @@ export const Map = () => {
     });
 
     return (
-        <div>
+        <div className="Map">
             <div ref={mapContainer} className="map-container" />
         </div>
     );
