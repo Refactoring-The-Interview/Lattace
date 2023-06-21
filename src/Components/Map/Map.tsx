@@ -2,6 +2,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useContext, useEffect, useRef } from "react";
 
+import { MyMapObjectContext } from "../Context/MapObjectContext";
 import { MyMapCamContext } from "../Context/MyMapCamContextProvider";
 import "./MapS.scss";
 import { token } from "./token";
@@ -12,6 +13,7 @@ export const Map = () => {
     const mapContainer = useRef(null) as any;
     const map = useRef(null) as any;
     const { zoom, lng, lat } = useContext(MyMapCamContext);
+    const { setMap } = useContext(MyMapObjectContext);
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -21,12 +23,15 @@ export const Map = () => {
             center: [lng, lat],
             zoom: zoom,
         });
-        const marker = new mapboxgl.Marker({
+
+        new mapboxgl.Marker({
             color: "red",
             draggable: true,
         })
             .setLngLat([lng, lat])
             .addTo(map.current);
+
+        setMap(map.current);
     });
 
     return (
@@ -35,5 +40,3 @@ export const Map = () => {
         </div>
     );
 };
-
-// will need to have the markers in context for the sidebar to see?
