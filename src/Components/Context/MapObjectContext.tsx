@@ -10,7 +10,7 @@ interface MapObjectContextValues {
     map: any;
     mapContainer: any;
     camControls: any;
-    markers: any;
+    markers: any[];
     setMarkers(markers: any): void;
 }
 
@@ -30,7 +30,7 @@ export const MapObjectContextProvider = ({ children }: Props) => {
     const map = useRef(null);
     const mapContainer = useRef(null);
     const camControls = useCamControls();
-    const [markers, setMarkers] = useState<any>([]);
+    const [markers, setMarkers] = useState<any[]>([]);
 
     return (
         <MapObjectContext.Provider
