@@ -13,7 +13,7 @@ import { token } from "./token";
 mapboxgl.accessToken = token;
 
 export const Map = () => {
-    const { map, mapContainer, camControls, markers } =
+    const { map, mapContainer, camControls, markers, setMarkers } =
         useContext(MapObjectContext);
     let { lng, lat, zoom } = camControls;
 
@@ -28,27 +28,49 @@ export const Map = () => {
     });
 
     //dummy Air craft Bandits
-    const bandit = banditJetElement();
-    const friendly = FriendlyJetElement();
+
     const airFelid = [
-        { icon: friendly, draggable: true, GPS: [lng + 0.1, lat - 0.1], id: 1 },
-        { icon: friendly, draggable: true, GPS: [lng + 0.1, lat - 0.3], id: 2 },
         {
-            icon: friendly,
+            icon: FriendlyJetElement(),
             draggable: true,
-            GPS: [lng + 0.1, lat - 0.22],
+            GPS: [lng + 0.1, lat - 0.1],
+            id: 1,
+        },
+        {
+            icon: FriendlyJetElement(),
+            draggable: true,
+            GPS: [lng + 0.1, lat - 0.3],
+            id: 2,
+        },
+        {
+            icon: FriendlyJetElement(),
+            draggable: true,
+            GPS: [lng + 0.4, lat - 0.22],
             id: 3,
         },
-        { icon: bandit, draggable: true, GPS: [lng + 0.13, lat], id: 4 },
-        { icon: bandit, draggable: true, GPS: [lng + 0.34, lat], id: 5 },
-        { icon: bandit, draggable: true, GPS: [lng + 0.21, lat], id: 6 },
+        {
+            icon: banditJetElement(),
+            draggable: true,
+            GPS: [lng + 0.13, lat],
+            id: 4,
+        },
+        {
+            icon: banditJetElement(),
+            draggable: true,
+            GPS: [lng + 0.34, lat],
+            id: 5,
+        },
+        {
+            icon: banditJetElement(),
+            draggable: true,
+            GPS: [lng + 0.21, lat],
+            id: 6,
+        },
     ];
 
     airFelid.forEach((plane, item) => {
         Markers(plane);
     });
-
-    console.log(markers);
 
     return (
         <div className="Map">
