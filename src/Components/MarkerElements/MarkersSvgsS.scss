@@ -1,0 +1,17 @@
+.bandit-jet {
+    display: flex;
+    background-image: url("../../Assets/fighter-jet-bandit.svg");
+    background-size: cover;
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+}
+
+.friendly-jet {
+    display: flex;
+    background-image: url("../../Assets/fighter-jet-friendly.svg");
+    background-size: cover;
+    width: 5rem;
+    height: 5rem;
+    cursor: pointer;
+}
