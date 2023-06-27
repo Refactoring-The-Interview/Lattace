@@ -1,4 +1,4 @@
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { Marker } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { ReactNode, createContext, useRef, useState } from "react";
 
@@ -10,8 +10,8 @@ interface MapObjectContextValues {
     map: any;
     mapContainer: any;
     camControls: any;
-    markers: any[];
-    setMarkers(markers: any): void;
+    markers: Marker[] | any;
+    setMarkers(markers: Marker[] | any): void;
 }
 
 export const MapObjectContext = createContext<MapObjectContextValues>({

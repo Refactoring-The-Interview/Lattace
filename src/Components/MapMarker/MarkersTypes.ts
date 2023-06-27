@@ -3,4 +3,5 @@ export interface MarkerOptionProps {
     draggable: boolean;
     GPS: number[];
     id: number;
+    newMarker?: mapboxgl.Marker;
 }
