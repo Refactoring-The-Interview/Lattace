@@ -1,0 +1,56 @@
+.Tracks {
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+    .track-header {
+        display: flex;
+        justify-content: space-between;
+        color: red;
+        padding: 0.5rem 1rem;
+        font-size: 1.3rem;
+        font-weight: 200;
+    }
+    .banner {
+        display: flex;
+        justify-content: stretch;
+        align-items: center;
+    }
+    .shape {
+        margin-left: 1rem;
+    }
+
+    .target {
+        margin-left: 3rem;
+        font-size: 1.2rem;
+        font-weight: 200;
+        padding: 1rem;
+        width: 100%;
+        text-transform: capitalize;
+        border-bottom: solid 1px grey;
+    }
+
+    .target-info {
+        display: flex;
+        justify-content: space-between;
+        width: 10rem;
+        color: grey;
+    }
+
+    .bandit {
+        display: flex;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 10px solid red;
+    }
+
+    .angel {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 10px solid blue;
+    }
+}

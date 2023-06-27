@@ -11,7 +11,7 @@ interface MapObjectContextValues {
     mapContainer: any;
     camControls: any;
     markers: Marker[] | any;
-    setMarkers(markers: Marker[]): void;
+    setMarkers(markers: Marker[] | any): void;
 }
 
 export const MapObjectContext = createContext<MapObjectContextValues>({

@@ -22,8 +22,14 @@ export const useMarkers = (airFelid: MarkerOptionProps[]) => {
                     GPS: GPS,
                     newMarker: newMarker,
                 };
+
                 markers.push(markerObj);
-                setMarkers(markers);
+                const ids = markers.map((item: any) => item.id);
+                const filter = markers.filter((item: any, index: number) => {
+                    return !ids.includes(item.id, index + 1);
+                });
+
+                setMarkers(filter);
             }
         });
     }, [map]);
