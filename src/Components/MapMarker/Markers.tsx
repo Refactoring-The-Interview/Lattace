@@ -3,21 +3,28 @@ import { useContext, useEffect } from "react";
 import { MapObjectContext } from "../Context/MapObjectContext";
 import { MarkerOptionProps } from "./MarkersTypes";
 
-export const Markers = ({ icon, draggable, GPS, id }: MarkerOptionProps) => {
-    const { map, mapContainer, camControls, setMarkers, markers } =
-        useContext(MapObjectContext);
+export const useMarkers = (airFelid: MarkerOptionProps[]) => {
+    const { map, setMarkers, markers } = useContext(MapObjectContext);
 
     useEffect(() => {
-        if (map.current) {
-            const newMarker = new mapboxgl.Marker({
-                element: icon,
-                draggable: draggable,
-            });
-            setMarkers([...markers, newMarker]);
-            newMarker.setLngLat([GPS[0], GPS[1]]);
-            newMarker.addTo(map.current);
+        airFelid.forEach(({ icon, draggable, id, GPS }) => {
+            if (map.current) {
+                const newMarker = new mapboxgl.Marker({
+                    element: icon,
+                    draggable: draggable,
+                });
+                newMarker.setLngLat([GPS[0], GPS[1]]);
+                newMarker.addTo(map.current);
 
-            console.log(id, markers, GPS, newMarker);
-        }
+                const markerObj = {
+                    icon: icon,
+                    id: id,
+                    GPS: GPS,
+                    newMarker: newMarker,
+                };
+                markers.push(markerObj);
+                setMarkers(markers);
+            }
+        });
     }, [map]);
 };

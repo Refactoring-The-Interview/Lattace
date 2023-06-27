@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import "./MarkersSvgsS.scss";
 
 export const banditJetElement = () => {
@@ -8,6 +9,6 @@ export const banditJetElement = () => {
 
 export const FriendlyJetElement = () => {
     const el = document.createElement("div");
-    el.className = `friendly-jet ${Math.random()}`;
+    el.className = `friendly-jet`;
     return el;
 };
