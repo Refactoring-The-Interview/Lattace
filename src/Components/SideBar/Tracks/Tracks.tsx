@@ -1,12 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MapObjectContext } from "../../Context/MapObjectContext";
+import { TrackingDetails } from "../TrackingDetails/TrackingDetails";
 import "./TracksS.scss";
 
 export const Tracks = () => {
     const { markers, filteredMarkers } = useContext(MapObjectContext);
+    const [show, setShow] = useState(false);
 
     return (
         <div className="Tracks">
+            {markers.length} Tracks
             <div className="track-header">
                 <div>Hostel</div>
                 <div>3</div>
@@ -17,7 +20,13 @@ export const Tracks = () => {
                         ? "bandit"
                         : "angel";
                     return (
-                        <div className="banner" key={index}>
+                        <div
+                            className="banner"
+                            key={index}
+                            onClick={() => {
+                                setShow(!show);
+                            }}
+                        >
                             <span className={`${isBandit} shape`}></span>
                             <div className="target">
                                 <div className={`track`}>
@@ -29,6 +38,7 @@ export const Tracks = () => {
                                     <div>0 m</div>
                                     <div>0 m/s</div>
                                 </div>
+                                {show && <TrackingDetails />}
                             </div>
                         </div>
                     );

@@ -3,6 +3,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useContext, useEffect } from "react";
 import { MapObjectContext } from "../Context/MapObjectContext";
 import { useMarkers } from "../MapMarker/Markers";
+import { SideBar } from "../SideBar/SideBar";
+import { TrackingDetails } from "../SideBar/TrackingDetails/TrackingDetails";
 import { AirCraftPopulation } from "../Testing/AirCraftPopulation";
 import "./MapS.scss";
 import { token } from "./token";
@@ -28,7 +30,12 @@ export const Map = () => {
 
     return (
         <div className="Map">
-            <div ref={mapContainer} className="map-container"></div>
+            <div ref={mapContainer} className="map-container">
+                <div className="sideBar">
+                    <SideBar />
+                    <TrackingDetails />
+                </div>
+            </div>
         </div>
     );
 };
