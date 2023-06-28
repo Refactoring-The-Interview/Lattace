@@ -13,11 +13,12 @@ export const SearchBar = () => {
 
     useEffect(() => {
         const filterKeyword = markers.filter((marker: MarkerOptionProps) => {
+            const input = filterInput.toLowerCase();
             return (
-                !marker.id.toString().indexOf(filterInput) ||
-                !marker.icon.className.indexOf(filterInput) ||
-                !marker.GPS[0].toString().indexOf(filterInput) ||
-                !marker.GPS[1].toString().indexOf(filterInput)
+                !marker.id.toString().indexOf(input) ||
+                !marker.icon.className.indexOf(input) ||
+                !marker.GPS[0].toString().indexOf(input) ||
+                !marker.GPS[1].toString().indexOf(input)
             );
         });
         setFilteredMarkers(filterKeyword);
