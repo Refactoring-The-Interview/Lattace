@@ -4,7 +4,8 @@ import { MapObjectContext } from "../Context/MapObjectContext";
 import { MarkerOptionProps } from "./MarkersTypes";
 
 export const useMarkers = (airFelid: MarkerOptionProps[]) => {
-    const { map, setMarkers, markers } = useContext(MapObjectContext);
+    const { map, setMarkers, markers, setFilteredMarkers } =
+        useContext(MapObjectContext);
 
     useEffect(() => {
         airFelid.forEach(({ icon, draggable, id, GPS }) => {
@@ -23,13 +24,14 @@ export const useMarkers = (airFelid: MarkerOptionProps[]) => {
                     newMarker: newMarker,
                 };
 
-                markers.push(markerObj);
+                markers.push(markerObj as any);
                 const ids = markers.map((item: any) => item.id);
                 const filter = markers.filter((item: any, index: number) => {
                     return !ids.includes(item.id, index + 1);
                 });
 
                 setMarkers(filter);
+                setFilteredMarkers(filter);
             }
         });
     }, [map]);
