@@ -1,22 +1,15 @@
-import { useRef } from "react";
-import { Overlay } from "react-bootstrap";
+import { useContext } from "react";
+import { MapObjectContext } from "../../Context/MapObjectContext";
 import "./TrackingDetailsS.scss";
 
 export const TrackingDetails = () => {
-    const target = useRef(null);
+    const { selectedDetails } = useContext(MapObjectContext);
+
+    if (!selectedDetails) return <></>;
 
     return (
-        <span className="TrackingDetails">
-            <Overlay target={target.current} show={true} placement="left">
-                {({
-                    placement: _placement,
-                    arrowProps: _arrowProps,
-                    show: _show,
-                    popper: _popper,
-                    hasDoneInitialMeasure: _hasDoneInitialMeasure,
-                    ...props
-                }) => <div {...props}>Simple tooltip</div>}
-            </Overlay>
-        </span>
+        <div className="TrackingDetails">
+            <h1>hello</h1>
+        </div>
     );
 };
