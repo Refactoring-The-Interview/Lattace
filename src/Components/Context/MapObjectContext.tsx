@@ -13,6 +13,8 @@ interface MapObjectContextValues {
     camControls: any;
     markers: Marker[] | any;
     filteredMarkers: Marker[] | any;
+    selectedDetails: Marker | MarkerOptionProps | null;
+    setSelectedDetails(marker: Marker | MarkerOptionProps): void;
     setFilteredMarkers(markers: Marker[] | MarkerOptionProps[]): void;
     setMarkers(markers: Marker[] | MarkerOptionProps[]): void;
 }
@@ -22,6 +24,8 @@ export const MapObjectContext = createContext<MapObjectContextValues>({
     mapContainer: null,
     markers: [],
     filteredMarkers: [],
+    selectedDetails: null,
+    setSelectedDetails: () => {},
     setFilteredMarkers: () => {},
     camControls: () => {},
     setMarkers: () => {},
@@ -37,6 +41,9 @@ export const MapObjectContextProvider = ({ children }: Props) => {
     const camControls = useCamControls();
     const [markers, setMarkers] = useState<any[]>([]);
     const [filteredMarkers, setFilteredMarkers] = useState<any[]>([]);
+    const [selectedDetails, setSelectedDetails] = useState<
+        Marker | MarkerOptionProps | null
+    >(null);
 
     return (
         <MapObjectContext.Provider
@@ -46,6 +53,8 @@ export const MapObjectContextProvider = ({ children }: Props) => {
                 camControls,
                 markers,
                 filteredMarkers,
+                selectedDetails,
+                setSelectedDetails,
                 setMarkers,
                 setFilteredMarkers,
             }}

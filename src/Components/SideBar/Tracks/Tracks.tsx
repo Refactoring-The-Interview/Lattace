@@ -3,12 +3,14 @@ import { MapObjectContext } from "../../Context/MapObjectContext";
 import "./TracksS.scss";
 
 export const Tracks = () => {
-    const { markers, filteredMarkers } = useContext(MapObjectContext);
+    const { markers, filteredMarkers, setSelectedDetails } =
+        useContext(MapObjectContext);
 
     return (
         <div className="Tracks">
+            {markers.length} Tracks
             <div className="track-header">
-                <div>Hostel</div>
+                <div>Hostile</div>
                 <div>3</div>
             </div>
             {filteredMarkers.map(
@@ -17,12 +19,18 @@ export const Tracks = () => {
                         ? "bandit"
                         : "angel";
                     return (
-                        <div className="banner" key={index}>
+                        <div
+                            className="banner"
+                            key={index}
+                            onClick={(e) => {
+                                setSelectedDetails(markers[index]);
+                            }}
+                        >
                             <span className={`${isBandit} shape`}></span>
                             <div className="target">
                                 <div className={`track`}>
                                     {isBandit} ({" "}
-                                    {Math.floor(Math.random() * 10000)} )
+                                    {Math.floor(Math.random() * 100000)} )
                                 </div>
                                 <div className="target-info">
                                     <div>0° </div>

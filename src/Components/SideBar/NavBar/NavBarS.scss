@@ -1,7 +1,6 @@
 .NavBar {
     display: flex;
     justify-content: center;
-    color: white;
     text-decoration: none;
     border-bottom: 1px solid grey;
 
@@ -15,7 +14,7 @@
     }
 
     .nav {
-        --bs-nav-link-color: white;
+        --bs-nav-link-color: lightgrey;
         --bs-nav-link-hover-color: royalblue;
     }
 }
