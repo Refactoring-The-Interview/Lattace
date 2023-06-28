@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import "./MarkersSvgsS.scss";
 
 export const banditJetElement = () => {
@@ -9,6 +8,6 @@ export const banditJetElement = () => {
 
 export const FriendlyJetElement = () => {
     const el = document.createElement("div");
-    el.className = `friendly-jet`;
+    el.className = `angel-jet`;
     return el;
 };

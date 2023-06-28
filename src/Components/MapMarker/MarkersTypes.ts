@@ -1,6 +1,6 @@
 export interface MarkerOptionProps {
     icon: HTMLElement;
-    draggable: boolean;
+    draggable?: boolean;
     GPS: number[];
     id: number;
     newMarker?: mapboxgl.Marker;

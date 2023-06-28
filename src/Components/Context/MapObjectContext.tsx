@@ -3,6 +3,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { ReactNode, createContext, useRef, useState } from "react";
 
 import { token } from "../Map/token";
+import { MarkerOptionProps } from "../MapMarker/MarkersTypes";
 import { useCamControls } from "./useCamControls";
 mapboxgl.accessToken = token;
 
@@ -11,13 +12,17 @@ interface MapObjectContextValues {
     mapContainer: any;
     camControls: any;
     markers: Marker[] | any;
-    setMarkers(markers: Marker[] | any): void;
+    filteredMarkers: Marker[] | any;
+    setFilteredMarkers(markers: Marker[] | MarkerOptionProps[]): void;
+    setMarkers(markers: Marker[] | MarkerOptionProps[]): void;
 }
 
 export const MapObjectContext = createContext<MapObjectContextValues>({
     map: null,
     mapContainer: null,
     markers: [],
+    filteredMarkers: [],
+    setFilteredMarkers: () => {},
     camControls: () => {},
     setMarkers: () => {},
 });
@@ -31,6 +36,7 @@ export const MapObjectContextProvider = ({ children }: Props) => {
     const mapContainer = useRef(null);
     const camControls = useCamControls();
     const [markers, setMarkers] = useState<any[]>([]);
+    const [filteredMarkers, setFilteredMarkers] = useState<any[]>([]);
 
     return (
         <MapObjectContext.Provider
@@ -39,7 +45,9 @@ export const MapObjectContextProvider = ({ children }: Props) => {
                 mapContainer,
                 camControls,
                 markers,
+                filteredMarkers,
                 setMarkers,
+                setFilteredMarkers,
             }}
         >
             <>{children}</>
