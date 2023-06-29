@@ -22,15 +22,14 @@ export const Tracks = () => {
                         <div
                             className="banner"
                             key={index}
-                            onClick={(e) => {
+                            onClick={() => {
                                 setSelectedDetails(markers[index]);
                             }}
                         >
                             <span className={`${isBandit} shape`}></span>
                             <div className="target">
                                 <div className={`track`}>
-                                    {isBandit} ({" "}
-                                    {Math.floor(Math.random() * 100000)} )
+                                    {isBandit} ( {id} )
                                 </div>
                                 <div className="target-info">
                                     <div>0° </div>

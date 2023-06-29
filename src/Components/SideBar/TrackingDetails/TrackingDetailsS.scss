@@ -1,9 +1,48 @@
 .TrackingDetails {
     display: flex;
+    flex-direction: column;
     width: 20%;
-    height: 45%;
+    height: 40%;
     z-index: 1;
-    background-color: black;
+    padding: 1rem;
     border-radius: 0.5%;
     color: white;
+    background-color: black;
+
+    .slideWindow {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .details {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .col {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        width: 3rem;
+    }
+
+    .bandit {
+        display: flex;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 10px solid red;
+    }
+
+    .angel {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 10px solid blue;
+    }
 }
