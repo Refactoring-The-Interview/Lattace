@@ -1,36 +1,64 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { MapObjectContext } from "../../Context/MapObjectContext";
-import { DropdownOptions } from "./DropdownOptions/DropdownOptions";
+import { ThreatLevel } from "../../MapMarker/MarkersTypes";
+import { ThreatLevelDropdown } from "./DropdownOptions/DropdownOptions";
 import "./TrackingDetailsS.scss";
 
-export enum Options {
-    bandit = "outline-danger",
-    angel = "outline-primary",
-    bogie = "outline-light",
-}
+const getBtnAttributes = (threatLevel: ThreatLevel) => {
+    switch (threatLevel) {
+        case ThreatLevel.ANGEL:
+            return {
+                variant: "outline-primary",
+                className: "angel",
+                title: "Angel",
+            };
+        case ThreatLevel.BANDIT:
+            return {
+                variant: "outline-danger",
+                className: "bandit",
+                title: "Bandit",
+            };
+        case ThreatLevel.BOGIE:
+        default:
+            return {
+                variant: "outline-light",
+                className: "bogie",
+                title: "Bogie",
+            };
+    }
+};
 
 export const TrackingDetails = () => {
-    const { selectedDetails, markers } = useContext(MapObjectContext);
+    const { selectedDetails, setThreatLevel } = useContext(MapObjectContext);
 
-    const { icon, GPS, id, newMarker } = selectedDetails || markers;
-    const isBandit = icon?.className?.indexOf("bandit") ? "angel" : "bandit";
-    const [btnColor, setBtnColor] = useState<Options>(Options[isBandit]);
+    if (!selectedDetails) return null;
 
-    if (!selectedDetails) return <></>;
+    const { icon, GPS, id, newMarker, threatLevel } = selectedDetails;
+    const btnAttributes = getBtnAttributes(threatLevel);
+    const setMarkerThreatLevel = (tl: ThreatLevel) => {
+        console.log("set threat in details");
+        setThreatLevel(id, tl);
+    };
+
     return (
         <div className="TrackingDetails">
             <div className="slideWindow">
                 <div>
                     <h1>
-                        <div className={`${isBandit}`} />
+                        <div className={`${btnAttributes.className}`} />
                         <div>
-                            {isBandit} ({id})
+                            {btnAttributes.title} ({id})
                         </div>
                     </h1>
                 </div>
                 <div>0°, 0°</div>
-                <DropdownOptions value={btnColor} setValue={setBtnColor} />
+                <ThreatLevelDropdown
+                    btnName={btnAttributes.title}
+                    variant={btnAttributes.variant}
+                    threatLevel={threatLevel}
+                    setThreatLevel={setMarkerThreatLevel}
+                />
             </div>
 
             <div className="details">

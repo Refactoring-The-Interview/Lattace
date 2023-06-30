@@ -1,39 +1,34 @@
-import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import { Options } from "../TrackingDetails";
+import { ThreatLevel } from "../../../MapMarker/MarkersTypes";
 
 interface Props {
-    value: Options;
-    setValue(value: Options): void;
+    btnName: string;
+    variant: string;
+    threatLevel: ThreatLevel;
+    setThreatLevel(value: ThreatLevel): void;
 }
 
-export const DropdownOptions = ({ value, setValue }: Props) => {
-    const [btnName, setBtnName] = useState<string | null>("hostile");
+export const ThreatLevelDropdown = ({
+    btnName,
+    variant,
+    threatLevel,
+    setThreatLevel,
+}: Props) => {
     return (
         <Dropdown
-            onSelect={(name) => {
-                setBtnName(name);
+            onSelect={(key) => {
+                setThreatLevel(parseInt(key || "0") as ThreatLevel);
             }}
         >
-            <Dropdown.Toggle variant={value} id="dropdown-basic">
+            <Dropdown.Toggle variant={variant} id="dropdown-basic">
                 <h5>{btnName}</h5>
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-                <Dropdown.Item
-                    eventKey={"Hostile"}
-                    onClick={(e) => {
-                        setValue(Options.bandit);
-                    }}
-                >
+                <Dropdown.Item eventKey={ThreatLevel.BANDIT}>
                     Hostile
                 </Dropdown.Item>
-                <Dropdown.Item
-                    eventKey={"Friendly"}
-                    onClick={(e) => {
-                        setValue(Options.angel);
-                    }}
-                >
+                <Dropdown.Item eventKey={ThreatLevel.ANGEL}>
                     Friendly
                 </Dropdown.Item>
             </Dropdown.Menu>

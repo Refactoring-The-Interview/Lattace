@@ -8,7 +8,7 @@ export const useMarkers = (airFelid: MarkerOptionProps[]) => {
         useContext(MapObjectContext);
 
     useEffect(() => {
-        airFelid.forEach(({ icon, draggable, id, GPS }) => {
+        airFelid.forEach(({ icon, draggable, id, GPS, threatLevel }) => {
             if (map.current) {
                 const newMarker = new mapboxgl.Marker({
                     element: icon,
@@ -18,10 +18,11 @@ export const useMarkers = (airFelid: MarkerOptionProps[]) => {
                 newMarker.addTo(map.current);
 
                 const markerObj = {
-                    icon: icon,
-                    id: id,
-                    GPS: GPS,
-                    newMarker: newMarker,
+                    icon,
+                    id,
+                    GPS,
+                    newMarker,
+                    threatLevel,
                 };
 
                 markers.push(markerObj as any);
