@@ -7,7 +7,6 @@ export const SideBar = () => {
     return (
         <div className="SideBar">
             <NavBar />
-            <SearchBar />
             <Tracks />
         </div>
     );

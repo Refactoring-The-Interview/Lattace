@@ -6,8 +6,12 @@ import { MarkerOptionProps } from "../../MapMarker/MarkersTypes";
 import { Filters } from "../Filters/Filters";
 import "./SearchBarS.scss";
 
-export const SearchBar = () => {
-    const { markers, setFilteredMarkers } = useContext(MapObjectContext);
+interface Props {
+    setCurrentMarkers(newMarkers: MarkerOptionProps[]): void;
+}
+
+export const SearchBar = ({ setCurrentMarkers }: Props) => {
+    const { markers } = useContext(MapObjectContext);
 
     const [filterInput, setFilterInput] = useState<string>("");
 
@@ -21,7 +25,8 @@ export const SearchBar = () => {
                 !marker.GPS[1].toString().indexOf(input)
             );
         });
-        setFilteredMarkers(filterKeyword);
+
+        setCurrentMarkers(filterKeyword);
     }, [filterInput]);
 
     return (
