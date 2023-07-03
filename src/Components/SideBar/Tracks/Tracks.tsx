@@ -1,19 +1,25 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { MapObjectContext } from "../../Context/MapObjectContext";
+import { MarkerOptionProps } from "../../MapMarker/MarkersTypes";
+import { SearchBar } from "../SearchBar/SearchBar";
 import "./TracksS.scss";
 
 export const Tracks = () => {
-    const { markers, filteredMarkers, setSelectedDetails } =
-        useContext(MapObjectContext);
+    const { markers, setSelectedDetails } = useContext(MapObjectContext);
+    const [currentMarkers, setCurrentMarkers] =
+        useState<MarkerOptionProps[]>(markers);
 
     return (
         <div className="Tracks">
+            <div>
+                <SearchBar setCurrentMarkers={setCurrentMarkers} />
+            </div>
             {markers.length} Tracks
             <div className="track-header">
                 <div>Hostile</div>
                 <div>3</div>
             </div>
-            {filteredMarkers.map(
+            {currentMarkers.map(
                 ({ icon, id, GPS, newMarker }: any, index: number) => {
                     const isBandit = icon.className.includes("bandit")
                         ? "bandit"
@@ -22,15 +28,14 @@ export const Tracks = () => {
                         <div
                             className="banner"
                             key={index}
-                            onClick={(e) => {
+                            onClick={() => {
                                 setSelectedDetails(markers[index]);
                             }}
                         >
                             <span className={`${isBandit} shape`}></span>
                             <div className="target">
                                 <div className={`track`}>
-                                    {isBandit} ({" "}
-                                    {Math.floor(Math.random() * 100000)} )
+                                    {isBandit} ( {id} )
                                 </div>
                                 <div className="target-info">
                                     <div>0° </div>
