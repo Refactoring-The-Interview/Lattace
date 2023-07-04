@@ -47,12 +47,9 @@ export const MapObjectContextProvider = ({ children }: Props) => {
             const newMarkers = [...m];
             const index = newMarkers.findIndex(({ id }) => id === markerId);
             newMarkers[index].threatLevel = threatLevel;
-            console.log("newMarkers", newMarkers);
             return newMarkers;
         });
     };
-
-    console.log("markers", markers);
 
     return (
         <MapObjectContext.Provider

@@ -30,14 +30,14 @@ const getBtnAttributes = (threatLevel: ThreatLevel) => {
 };
 
 export const TrackingDetails = () => {
-    const { selectedDetails, setThreatLevel } = useContext(MapObjectContext);
+    const { selectedDetails, setThreatLevel, setMarkers, markers } =
+        useContext(MapObjectContext);
 
     if (!selectedDetails) return null;
 
     const { icon, GPS, id, newMarker, threatLevel } = selectedDetails;
     const btnAttributes = getBtnAttributes(threatLevel);
     const setMarkerThreatLevel = (tl: ThreatLevel) => {
-        console.log("set threat in details");
         setThreatLevel(id, tl);
     };
 
