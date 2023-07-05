@@ -1,5 +1,6 @@
 .bandit-jet {
     display: flex;
+    position: absolute;
     background-image: url("../../Assets/fighter-jet-bandit.svg");
     background-size: cover;
     width: 5rem;
@@ -9,6 +10,7 @@
 
 .angel-jet {
     display: flex;
+    position: absolute;
     background-image: url("../../Assets/fighter-jet-friendly.svg");
     background-size: cover;
     width: 5rem;

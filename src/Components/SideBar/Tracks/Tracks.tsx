@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MapObjectContext } from "../../Context/MapObjectContext";
 import { MarkerOptionProps } from "../../MapMarker/MarkersTypes";
 import { SearchBar } from "../SearchBar/SearchBar";
@@ -8,6 +8,10 @@ export const Tracks = () => {
     const { markers, setSelectedDetails } = useContext(MapObjectContext);
     const [currentMarkers, setCurrentMarkers] =
         useState<MarkerOptionProps[]>(markers);
+
+    useEffect(() => {
+        setCurrentMarkers(markers);
+    }, [currentMarkers, markers]);
 
     return (
         <div className="Tracks">
@@ -20,10 +24,11 @@ export const Tracks = () => {
                 <div>3</div>
             </div>
             {currentMarkers.map(
-                ({ icon, id, GPS, newMarker }: any, index: number) => {
-                    const isBandit = icon.className.includes("bandit")
-                        ? "bandit"
-                        : "angel";
+                (
+                    { icon, id, GPS, newMarker, threatLevel }: any,
+                    index: number
+                ) => {
+                    const isBandit = threatLevel === 0 ? "bandit" : "angel";
                     return (
                         <div
                             className="banner"
