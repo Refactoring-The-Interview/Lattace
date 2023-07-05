@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { MapObjectContext } from "../Context/MapObjectContext";
-import { MarkerOptionProps, ThreatLevel } from "../MapMarker/MarkersTypes";
+import { MapObjectContext } from "../Components/Context/MapObjectContext";
+import {
+    MarkerOptionProps,
+    ThreatLevel,
+} from "../Components/MapMarker/MarkersTypes";
 import {
     angelJetElement,
     banditJetElement,
-} from "../MarkerElements/MarkerAirCraft";
+} from "../Components/MarkerElements/MarkerAirCraft";
 
 export const AirCraftPopulation = () => {
     const { camControls } = useContext(MapObjectContext);

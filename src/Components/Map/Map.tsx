@@ -1,11 +1,11 @@
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useContext, useEffect } from "react";
+import { AirCraftPopulation } from "../../Apis/AirCraftPopulation";
 import { MapObjectContext } from "../Context/MapObjectContext";
 import { useMarkers } from "../MapMarker/Markers";
 import { SideBar } from "../SideBar/SideBar";
 import { TrackingDetails } from "../SideBar/TrackingDetails/TrackingDetails";
-import { AirCraftPopulation } from "../Testing/AirCraftPopulation";
 import "./MapS.scss";
 import { token } from "./token";
 

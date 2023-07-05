@@ -1,0 +1,15 @@
+.TrackingDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem;
+
+    .title {
+        color: lightgray;
+        text-transform: capitalize;
+    }
+    .value {
+        color: white;
+        text-transform: capitalize;
+    }
+}
