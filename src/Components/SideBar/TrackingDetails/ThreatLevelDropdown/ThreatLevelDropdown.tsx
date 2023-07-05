@@ -1,5 +1,6 @@
 import { Dropdown } from "react-bootstrap";
 import { ThreatLevel } from "../../../MapMarker/MarkersTypes";
+import "./ThreatLevelDropdownS.scss";
 
 interface Props {
     btnName: string;
@@ -16,6 +17,7 @@ export const ThreatLevelDropdown = ({
 }: Props) => {
     return (
         <Dropdown
+            className="ThreatLevel"
             onSelect={(key) => {
                 setThreatLevel(parseInt(key || "0") as ThreatLevel);
             }}

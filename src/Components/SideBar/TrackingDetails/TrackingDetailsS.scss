@@ -9,8 +9,31 @@
     color: white;
     background-color: black;
 
+    .shape {
+        margin-right: 1rem;
+    }
+
     .detailsHeader {
+        display: flex;
+        flex-direction: column;
         width: 100%;
+
+        .name {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            width: 100%;
+        }
+
+        .coors {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .lat {
+            padding-right: 0.5rem;
+        }
     }
 
     .detailsBody {
