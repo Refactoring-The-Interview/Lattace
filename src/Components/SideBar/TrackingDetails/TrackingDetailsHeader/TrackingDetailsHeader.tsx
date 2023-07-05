@@ -5,6 +5,7 @@ import { MapObjectContext } from "../../../Context/MapObjectContext";
 import { ThreatLevel } from "../../../MapMarker/MarkersTypes";
 import { jetElColorUpdate } from "../../../MarkerElements/MarkerAirCraft";
 import { ThreatLevelDropdown } from "../ThreatLevelDropdown/ThreatLevelDropdown";
+import "./TrackingDetailsHeaderS.scss";
 
 export const TrackingDetailsHeader = () => {
     const { selectedDetails, setThreatLevel } = useContext(MapObjectContext);

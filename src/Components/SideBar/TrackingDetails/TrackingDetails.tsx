@@ -20,7 +20,8 @@ export const TrackingDetails = () => {
                     return <TrackingDetail title={title} value={value} />;
                 })}
             </div>
-            <div>
+
+            <div className="detailsFooter">
                 <div>Show More Properties</div>
                 <Button variant="secondary">Cancel Tasking</Button>
             </div>

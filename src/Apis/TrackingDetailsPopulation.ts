@@ -21,13 +21,7 @@ export const trackingDetails = [
     },
     {
         title: "Time since Creation",
-        value: () => {
-            const creationTime = new Date().getSeconds();
-            const currentTime = setInterval(() => {
-                return new Date().getSeconds();
-            }, 1000);
-            return (currentTime as any) - creationTime;
-        },
+        value: "StopWatch",
     },
     {
         title: "Last Updated",
