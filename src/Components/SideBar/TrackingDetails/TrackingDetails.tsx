@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { MapObjectContext } from "../../Context/MapObjectContext";
 import { ThreatLevel } from "../../MapMarker/MarkersTypes";
+import { jetElColorUpate } from "../../MarkerElements/MarkerAirCraft";
 import { ThreatLevelDropdown } from "./DropdownOptions/DropdownOptions";
 import "./TrackingDetailsS.scss";
 
@@ -30,15 +31,15 @@ const getBtnAttributes = (threatLevel: ThreatLevel) => {
 };
 
 export const TrackingDetails = () => {
-    const { selectedDetails, setThreatLevel, setMarkers, markers } =
-        useContext(MapObjectContext);
+    const { selectedDetails, setThreatLevel } = useContext(MapObjectContext);
 
     if (!selectedDetails) return null;
 
-    const { icon, GPS, id, newMarker, threatLevel } = selectedDetails;
+    const { id, threatLevel } = selectedDetails;
     const btnAttributes = getBtnAttributes(threatLevel);
     const setMarkerThreatLevel = (tl: ThreatLevel) => {
         setThreatLevel(id, tl);
+        jetElColorUpate(tl, id);
     };
 
     return (

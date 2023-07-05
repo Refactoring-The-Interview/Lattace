@@ -27,7 +27,7 @@ export const SearchBar = ({ setCurrentMarkers }: Props) => {
         });
 
         setCurrentMarkers(filterKeyword);
-    }, [filterInput]);
+    }, [filterInput, markers, setCurrentMarkers]);
 
     return (
         <div className="SearchBar">

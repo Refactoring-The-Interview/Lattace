@@ -5,14 +5,12 @@ import { SearchBar } from "../SearchBar/SearchBar";
 import "./TracksS.scss";
 
 export const Tracks = () => {
-    const { markers, setSelectedDetails, setThreatLevel } =
-        useContext(MapObjectContext);
+    const { markers, setSelectedDetails } = useContext(MapObjectContext);
     const [currentMarkers, setCurrentMarkers] =
         useState<MarkerOptionProps[]>(markers);
 
     useEffect(() => {
         setCurrentMarkers(markers);
-        console.log("markers", markers, "current", currentMarkers);
     }, [currentMarkers, markers]);
 
     return (

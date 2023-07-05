@@ -1,5 +1,4 @@
 import { NavBar } from "./NavBar/NavBar";
-import { SearchBar } from "./SearchBar/SearchBar";
 import "./SideBarS.scss";
 import { Tracks } from "./Tracks/Tracks";
 

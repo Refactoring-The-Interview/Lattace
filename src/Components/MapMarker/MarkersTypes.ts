@@ -5,6 +5,7 @@ export interface MarkerOptionProps {
     threatLevel: ThreatLevel;
     id: number;
     newMarker?: mapboxgl.Marker;
+    upDateIcon?(value: any): void;
 }
 
 export enum ThreatLevel {

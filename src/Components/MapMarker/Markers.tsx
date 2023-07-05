@@ -24,6 +24,7 @@ export const useMarkers = (airFelid: MarkerOptionProps[]) => {
                     threatLevel,
                 };
 
+                // is making to many renders
                 markers.push(markerObj as any);
                 const ids = markers.map((item: any) => item.id);
                 const filter = markers.filter((item: any, index: number) => {
