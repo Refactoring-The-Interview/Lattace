@@ -12,7 +12,7 @@ export const angelJetElement = (id: string | number) => {
     return el;
 };
 
-export const jetElColorUpate = (tl: number, id: number) => {
+export const jetElColorUpdate = (tl: number, id: number) => {
     if (tl === 0) {
         document.getElementsByClassName(
             `id:${id}`
