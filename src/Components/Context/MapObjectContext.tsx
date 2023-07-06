@@ -14,7 +14,7 @@ interface MapObjectContextValues {
     camControls: any;
     markers: Marker[] | any;
     selectedDetails: MarkerOptionProps | null;
-    setSelectedDetails(marker: MarkerOptionProps): void;
+    setSelectedDetails(marker: MarkerOptionProps | null): void;
     setMarkers(markers: Marker[] | MarkerOptionProps[]): void;
     setThreatLevel(id: number, threatLevel: ThreatLevel): void;
 }
