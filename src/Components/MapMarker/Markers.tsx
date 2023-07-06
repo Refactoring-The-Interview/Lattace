@@ -35,4 +35,27 @@ export const useMarkers = (airFelid: MarkerOptionProps[]) => {
             }
         });
     }, [map]);
+
+    useEffect(() => {
+        setInterval(() => {
+            markers.forEach(({ newMarker, GPS, icon, draggable }: any) => {
+                newMarker.remove();
+                newMarker = new mapboxgl.Marker({
+                    element: icon,
+                    draggable: draggable,
+                });
+                newMarker.setLngLat([(GPS[0] += 0.01), (GPS[1] += 0.01)]);
+                newMarker.addTo(map.current);
+                GPS = [(GPS[0] += 0.01), (GPS[1] += 0.01)];
+                return markers;
+            });
+
+            const ids = markers.map((item: any) => item.id);
+            const filter = markers.filter((item: any, index: number) => {
+                return !ids.includes(item.id, index + 1);
+            });
+
+            setMarkers(filter);
+        }, 5000);
+    }, [markers]);
 };
