@@ -1,86 +1,30 @@
-import { useContext } from "react";
-import { Button } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { trackingDetails } from "../../../Apis/TrackingDetailsPopulation";
 import { MapObjectContext } from "../../Context/MapObjectContext";
-import { ThreatLevel } from "../../MapMarker/MarkersTypes";
-import { jetElColorUpdate } from "../../MarkerElements/MarkerAirCraft";
-import { ThreatLevelDropdown } from "./DropdownOptions/DropdownOptions";
+import { TrackingDetail } from "./TrackingDetail/TrackingDetail";
+import { TrackingDetailsFooter } from "./TrackingDetailsFooter/TrackingDetailsFooter";
+import { TrackingDetailsHeader } from "./TrackingDetailsHeader/TrackingDetailsHeader";
 import "./TrackingDetailsS.scss";
 
-const getBtnAttributes = (threatLevel: ThreatLevel) => {
-    switch (threatLevel) {
-        case ThreatLevel.ANGEL:
-            return {
-                variant: "outline-primary",
-                className: "angel",
-                title: "Angel",
-            };
-        case ThreatLevel.BANDIT:
-            return {
-                variant: "outline-danger",
-                className: "bandit",
-                title: "Bandit",
-            };
-        case ThreatLevel.BOGIE:
-        default:
-            return {
-                variant: "outline-light",
-                className: "bogie",
-                title: "Bogie",
-            };
-    }
-};
-
 export const TrackingDetails = () => {
-    const { selectedDetails, setThreatLevel } = useContext(MapObjectContext);
+    const { selectedDetails } = useContext(MapObjectContext);
+    const [show, setShow] = useState<boolean>(false);
 
     if (!selectedDetails) return null;
 
-    const { id, threatLevel } = selectedDetails;
-    const btnAttributes = getBtnAttributes(threatLevel);
-    const setMarkerThreatLevel = (tl: ThreatLevel) => {
-        setThreatLevel(id, tl);
-        jetElColorUpdate(tl, id);
-    };
-
     return (
         <div className="TrackingDetails">
-            <div className="slideWindow">
-                <div>
-                    <h1>
-                        <div className={`${btnAttributes.className}`} />
-                        <div>
-                            {btnAttributes.title} ({id})
-                        </div>
-                    </h1>
-                </div>
-                <div>0°, 0°</div>
-                <ThreatLevelDropdown
-                    btnName={btnAttributes.title}
-                    variant={btnAttributes.variant}
-                    threatLevel={threatLevel}
-                    setThreatLevel={setMarkerThreatLevel}
-                />
-            </div>
+            <TrackingDetailsHeader />
 
-            <div className="details">
-                <div className="col">
-                    <div>Enviorment</div>
-                    <div>Heading</div>
-                    <div>Altitude</div>
-                    <div>Source</div>
+            {show && (
+                <div className="detailsBody">
+                    {trackingDetails.map(({ title, value }) => {
+                        return <TrackingDetail title={title} value={value} />;
+                    })}
                 </div>
+            )}
 
-                <div className="col">
-                    <div>Sensors</div>
-                    <div>Time Since Creation</div>
-                    <div>Last Updated</div>
-                    <div>Estimated Strength</div>
-                </div>
-            </div>
-            <div>
-                <div>Show More Properties</div>
-                <Button>Cancel Tasking</Button>
-            </div>
+            <TrackingDetailsFooter show={show} setShow={setShow} />
         </div>
     );
 };

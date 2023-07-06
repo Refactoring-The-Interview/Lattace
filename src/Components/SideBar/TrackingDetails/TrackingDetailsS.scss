@@ -9,24 +9,19 @@
     color: white;
     background-color: black;
 
-    .slideWindow {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+    .shape {
+        margin-right: 1rem;
     }
 
-    .details {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    .col {
+    .detailsBody {
         display: flex;
         flex-direction: column;
-        padding: 10px;
-        width: 3rem;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 20rem;
+        align-content: space-between;
+        margin-bottom: 1.5rem;
     }
 
     .bandit {
