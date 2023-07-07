@@ -1,31 +1,41 @@
-import mapboxgl, { Marker } from "mapbox-gl";
+import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { ReactNode, createContext, useRef, useState } from "react";
+import { ReactNode, RefObject, createContext, useRef, useState } from "react";
 
+import { airCraftPopulation } from "../../Apis/AirCraftPopulation";
 import { token } from "../Map/token";
-import { MarkerOptionProps, ThreatLevel } from "../MapMarker/MarkersTypes";
-import { useCamControls } from "./useCamControls";
+import { MarkerOptionProps, ThreatLevel } from "./types";
+import { CamControls, useCamControls } from "./useCamControls";
 
 mapboxgl.accessToken = token;
 
 interface MapObjectContextValues {
     map: any;
     mapContainer: any;
-    camControls: any;
-    markers: Marker[] | any;
+    camControls: CamControls;
+    mapMarkers: RefObject<{ [id: string]: mapboxgl.Marker }> | null;
+    markers: MarkerOptionProps[];
     selectedDetails: MarkerOptionProps | null;
     setSelectedDetails(marker: MarkerOptionProps | null): void;
-    setMarkers(markers: Marker[] | MarkerOptionProps[]): void;
+    setMarkers: React.Dispatch<React.SetStateAction<MarkerOptionProps[]>>;
     setThreatLevel(id: number, threatLevel: ThreatLevel): void;
 }
 
 export const MapObjectContext = createContext<MapObjectContextValues>({
     map: null,
     mapContainer: null,
+    mapMarkers: null,
     markers: [],
     selectedDetails: null,
     setSelectedDetails: () => {},
-    camControls: () => {},
+    camControls: {
+        lng: 0,
+        lat: 0,
+        zoom: 0,
+        setLat: () => {},
+        setLng: () => {},
+        setZoom: () => {},
+    },
     setMarkers: () => {},
     setThreatLevel: (id: number, threatLevel: ThreatLevel) => {},
 });
@@ -38,7 +48,9 @@ export const MapObjectContextProvider = ({ children }: Props) => {
     const map = useRef(null);
     const mapContainer = useRef(null);
     const camControls = useCamControls();
-    const [markers, setMarkers] = useState<any[]>([]);
+    const airField = airCraftPopulation(camControls);
+    const [markers, setMarkers] = useState<MarkerOptionProps[]>(airField);
+    const mapMarkers = useRef<{ [id: string]: mapboxgl.Marker }>({});
     const [selectedDetails, setSelectedDetails] =
         useState<MarkerOptionProps | null>(null);
 
@@ -57,6 +69,7 @@ export const MapObjectContextProvider = ({ children }: Props) => {
                 map,
                 mapContainer,
                 camControls,
+                mapMarkers,
                 markers,
                 selectedDetails,
                 setSelectedDetails,

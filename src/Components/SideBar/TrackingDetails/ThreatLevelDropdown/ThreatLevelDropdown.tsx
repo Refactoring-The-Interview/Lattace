@@ -1,6 +1,7 @@
 import { Dropdown } from "react-bootstrap";
-import { ThreatLevel } from "../../../MapMarker/MarkersTypes";
+
 import "./ThreatLevelDropdownS.scss";
+import { ThreatLevel } from "../../../Context/types";
 
 interface Props {
     btnName: string;

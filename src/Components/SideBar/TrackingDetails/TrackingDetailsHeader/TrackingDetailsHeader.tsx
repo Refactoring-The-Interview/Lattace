@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { DecimalCoordsToDeg } from "../../../../Apis/DecimalCoordsToDeg";
 import { getTrackDetailsBtnAttributes } from "../../../../Apis/utils";
 import { MapObjectContext } from "../../../Context/MapObjectContext";
-import { ThreatLevel } from "../../../MapMarker/MarkersTypes";
+
 import { jetElColorUpdate } from "../../../MarkerElements/MarkerAirCraft";
 import { ThreatLevelDropdown } from "../ThreatLevelDropdown/ThreatLevelDropdown";
 import "./TrackingDetailsHeaderS.scss";
+import { ThreatLevel } from "../../../Context/types";
 
 export const TrackingDetailsHeader = () => {
     const { selectedDetails, setThreatLevel } = useContext(MapObjectContext);
