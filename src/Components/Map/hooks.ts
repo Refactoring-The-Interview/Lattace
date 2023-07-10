@@ -17,7 +17,8 @@ export const useMarkers = () => {
                     element: icon,
                     draggable: draggable,
                 });
-                updateNewMarker.setLngLat([GPS[0], GPS[1]]);
+
+                updateNewMarker.setLngLat([GPS[0], GPS[1] + 0.002]);
                 updateNewMarker.setRotation(rotation);
 
                 // add to our ref store
@@ -30,27 +31,19 @@ export const useMarkers = () => {
     }, [map, mapMarkers, markers]);
 };
 
-// changes the data store for markers to move icons
+// changes the data store for markers to move icon
 export const useMarkersMovement = () => {
     const { setMarkers } = useContext(MapObjectContext);
+
     useEffect(() => {
-        const interval = setInterval(() => {
+        setInterval(() => {
             setMarkers((markers) => {
                 const newMarkers = markers.map((marker: MarkerOptionProps) => {
-                    // console.log(rotation, " rotation");
-                    // newMarker.remove();
-                    // newMarker = new mapboxgl.Marker({
-                    //     element: icon,
-                    //     draggable: draggable,
-                    // });
-                    // newMarker.setLngLat([GPS[0], (GPS[1] += 0.01)]);
-                    // newMarker.addTo(map.current);
-                    // GPS = [GPS[0], (GPS[1] += 0.002)];
+                    // think state separate from the reactive layer
 
-                    // think state seprate from the reactive layer
                     return {
                         ...marker,
-                        GPS: [marker.GPS[0] + 0.0005, marker.GPS[1] + 0.0005],
+                        GPS: [marker.GPS[0], marker.GPS[1] + 0.005],
                         rotation: marker.rotation + 5,
                     } as MarkerOptionProps;
                 });
@@ -58,7 +51,5 @@ export const useMarkersMovement = () => {
                 return newMarkers;
             });
         }, 1000);
-
-        return clearInterval(interval);
     }, [setMarkers]);
 };

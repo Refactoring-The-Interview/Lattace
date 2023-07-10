@@ -1,9 +1,7 @@
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useContext, useEffect } from "react";
-
 import { MapObjectContext } from "../Context/MapObjectContext";
-
 import { SideBar } from "../SideBar/SideBar";
 import { TrackingDetails } from "../SideBar/TrackingDetails/TrackingDetails";
 import "./MapS.scss";
