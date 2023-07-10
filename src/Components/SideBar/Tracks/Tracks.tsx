@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { MapObjectContext } from "../../Context/MapObjectContext";
-import { MarkerOptionProps } from "../../MapMarker/MarkersTypes";
+
 import { SearchBar } from "../SearchBar/SearchBar";
 import "./TracksS.scss";
+import { MarkerOptionProps } from "../../Context/types";
 
 export const Tracks = () => {
     const { markers, setSelectedDetails } = useContext(MapObjectContext);

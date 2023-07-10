@@ -1,4 +1,4 @@
-import { ThreatLevel } from "../Components/MapMarker/MarkersTypes";
+import { ThreatLevel } from "../Components/Context/types";
 
 export const getTrackDetailsBtnAttributes = (threatLevel: ThreatLevel) => {
     switch (threatLevel) {

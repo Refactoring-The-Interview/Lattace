@@ -1,12 +1,13 @@
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useContext, useEffect } from "react";
-import { AirCraftPopulation } from "../../Apis/AirCraftPopulation";
+
 import { MapObjectContext } from "../Context/MapObjectContext";
-import { useMarkers } from "../MapMarker/Markers";
+
 import { SideBar } from "../SideBar/SideBar";
 import { TrackingDetails } from "../SideBar/TrackingDetails/TrackingDetails";
 import "./MapS.scss";
+import { useMarkers, useMarkersMovement } from "./hooks";
 import { token } from "./token";
 
 mapboxgl.accessToken = token;
@@ -14,7 +15,6 @@ mapboxgl.accessToken = token;
 export const Map = () => {
     const { map, mapContainer, camControls } = useContext(MapObjectContext);
     let { lng, lat, zoom } = camControls;
-    const airFelid = AirCraftPopulation();
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -26,7 +26,8 @@ export const Map = () => {
         });
     });
 
-    useMarkers(airFelid);
+    useMarkers();
+    useMarkersMovement();
 
     return (
         <div className="Map">

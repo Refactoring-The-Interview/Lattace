@@ -2,7 +2,8 @@ import { Form } from "react-bootstrap";
 
 import { useContext, useEffect, useState } from "react";
 import { MapObjectContext } from "../../Context/MapObjectContext";
-import { MarkerOptionProps } from "../../MapMarker/MarkersTypes";
+
+import { MarkerOptionProps } from "../../Context/types";
 import { Filters } from "../Filters/Filters";
 import "./SearchBarS.scss";
 

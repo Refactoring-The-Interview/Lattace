@@ -4,7 +4,7 @@ export interface MarkerOptionProps {
     GPS: number[];
     threatLevel: ThreatLevel;
     id: number;
-    newMarker?: mapboxgl.Marker;
+    rotation: number;
 }
 
 export enum ThreatLevel {
