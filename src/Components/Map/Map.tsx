@@ -20,7 +20,7 @@ export const Map = () => {
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             style: "mapbox://styles/mapbox/satellite-v9",
-            center: [lng, lat],
+            center: [lat, lng],
             zoom: zoom,
         });
     });

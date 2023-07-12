@@ -10,9 +10,9 @@ export interface CamControls {
 }
 
 export const useCamControls = (): CamControls => {
-    const [lng, setLng] = useState(-70.9);
-    const [lat, setLat] = useState(42.35);
-    const [zoom, setZoom] = useState(9);
+    const [lng, setLng] = useState(42.35);
+    const [lat, setLat] = useState(-70.9);
+    const [zoom, setZoom] = useState(8);
 
     return {
         lng,
