@@ -5,6 +5,7 @@ export interface MarkerOptionProps {
     threatLevel: ThreatLevel;
     id: number;
     rotation: number;
+    offset: number[];
 }
 
 export enum ThreatLevel {
