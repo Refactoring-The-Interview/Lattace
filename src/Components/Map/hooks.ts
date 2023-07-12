@@ -3,19 +3,28 @@ import mapboxgl from "mapbox-gl";
 import { useContext, useEffect, useRef } from "react";
 import { MapObjectContext } from "../Context/MapObjectContext";
 import { MarkerOptionProps, ThreatLevel } from "../Context/types";
+import {
+    angelJetElement,
+    banditJetElement,
+} from "../MarkerElements/MarkerAirCraft";
 
 export const useMarkers = () => {
     const { map, markers, mapMarkers } = useContext(MapObjectContext);
 
     useEffect(() => {
-        markers.forEach(({ icon, draggable, id, GPS, rotation }) => {
+        markers.forEach(({ id, GPS, rotation, threatLevel }) => {
             if (map.current && mapMarkers?.current) {
                 if (mapMarkers.current?.[id]) {
                     mapMarkers.current[id].remove();
                 }
+
+                const icon =
+                    threatLevel === ThreatLevel.ANGEL
+                        ? angelJetElement(id)
+                        : banditJetElement(id);
+
                 const updateNewMarker = new mapboxgl.Marker({
                     element: icon,
-                    draggable: draggable,
                 });
 
                 updateNewMarker.setLngLat([GPS[0], GPS[1]]);
@@ -39,8 +48,6 @@ export const useMarkersMovement = () => {
         const options = {
             steps: NUM_STEPS,
         };
-
-        // need to move the points in a circle
 
         const circle = turf
             .circle(center, radius, options)
@@ -84,5 +91,5 @@ export const useMarkersMovement = () => {
         }, 50);
 
         return () => clearInterval(interval);
-    }, [setMarkers]);
+    }, [lat, lng, setMarkers]);
 };

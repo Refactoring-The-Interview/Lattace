@@ -13,7 +13,6 @@ interface Props {
 export const ThreatLevelDropdown = ({
     btnName,
     variant,
-    threatLevel,
     setThreatLevel,
 }: Props) => {
     return (

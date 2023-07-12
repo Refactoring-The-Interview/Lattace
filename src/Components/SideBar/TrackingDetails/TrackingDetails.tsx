@@ -8,22 +8,18 @@ import "./TrackingDetailsS.scss";
 
 export const TrackingDetails = () => {
     const { selectedDetails } = useContext(MapObjectContext);
-    const [show, setShow] = useState<boolean>(false);
+    const [show, setShow] = useState<boolean>(true);
 
     if (!selectedDetails) return null;
 
     return (
         <div className="TrackingDetails">
             <TrackingDetailsHeader />
-
-            {show && (
-                <div className="detailsBody">
-                    {trackingDetails.map(({ title, value }) => {
-                        return <TrackingDetail title={title} value={value} />;
-                    })}
-                </div>
-            )}
-
+            <div className="detailsBody">
+                {trackingDetails.map(({ title, value }) => {
+                    return <TrackingDetail title={title} value={value} />;
+                })}
+            </div>
             <TrackingDetailsFooter show={show} setShow={setShow} />
         </div>
     );
