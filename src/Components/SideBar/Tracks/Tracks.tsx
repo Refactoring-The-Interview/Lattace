@@ -31,7 +31,7 @@ export const Tracks = () => {
                     index: number
                 ) => {
                     const isBandit = threatLevel === 0 ? "bandit" : "angel";
-                    const coors = DecimalCoordsToDeg(GPS[0], GPS[1]);
+
                     return (
                         <div
                             className="banner"
