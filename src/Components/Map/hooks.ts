@@ -1,9 +1,9 @@
+import * as turf from "@turf/turf";
 import mapboxgl from "mapbox-gl";
 import { useContext, useEffect } from "react";
 import { MapObjectContext } from "../Context/MapObjectContext";
 import { MarkerOptionProps } from "../Context/types";
 
-// reacts to data store changes and writes to the map
 export const useMarkers = () => {
     const { map, markers, mapMarkers } = useContext(MapObjectContext);
 
@@ -17,48 +17,52 @@ export const useMarkers = () => {
                     element: icon,
                     draggable: draggable,
                 });
+
                 updateNewMarker.setLngLat([GPS[0], GPS[1]]);
                 updateNewMarker.setRotation(rotation);
-
-                // add to our ref store
                 mapMarkers.current[id] = updateNewMarker;
-
-                // add to the map
                 updateNewMarker.addTo(map.current);
             }
         });
     }, [map, mapMarkers, markers]);
 };
 
-// changes the data store for markers to move icons
 export const useMarkersMovement = () => {
-    const { setMarkers } = useContext(MapObjectContext);
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setMarkers((markers) => {
-                const newMarkers = markers.map((marker: MarkerOptionProps) => {
-                    // console.log(rotation, " rotation");
-                    // newMarker.remove();
-                    // newMarker = new mapboxgl.Marker({
-                    //     element: icon,
-                    //     draggable: draggable,
-                    // });
-                    // newMarker.setLngLat([GPS[0], (GPS[1] += 0.01)]);
-                    // newMarker.addTo(map.current);
-                    // GPS = [GPS[0], (GPS[1] += 0.002)];
+    const { setMarkers, camControls } = useContext(MapObjectContext);
+    const { lat, lng } = camControls;
 
-                    // think state seprate from the reactive layer
-                    return {
-                        ...marker,
-                        GPS: [marker.GPS[0] + 0.0005, marker.GPS[1] + 0.0005],
-                        rotation: marker.rotation + 5,
-                    } as MarkerOptionProps;
-                });
+    useEffect(() => {
+        setInterval(() => {
+            setMarkers((markers) => {
+                const newMarkers = markers.map(
+                    (marker: MarkerOptionProps, index) => {
+                        const { GPS } = marker;
+
+                        const center = [lat, lng];
+                        const radius = 1;
+                        const options = {
+                            steps: 5,
+                        };
+
+                        // need to move the points in a circle
+
+                        const coors = [
+                            turf.circle(center, radius, options)?.geometry
+                                ?.coordinates[0][index][1],
+                            turf.circle(center, radius, options)?.geometry
+                                ?.coordinates[0][index][0],
+                        ] as number[];
+
+                        return {
+                            ...marker,
+                            GPS: coors,
+                            rotation: marker.rotation,
+                        } as MarkerOptionProps;
+                    }
+                );
 
                 return newMarkers;
             });
-        }, 1000);
-
-        return clearInterval(interval);
+        }, 5000);
     }, [setMarkers]);
 };
