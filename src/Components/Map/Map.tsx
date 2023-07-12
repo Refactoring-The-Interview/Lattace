@@ -6,9 +6,9 @@ import { SideBar } from "../SideBar/SideBar";
 import { TrackingDetails } from "../SideBar/TrackingDetails/TrackingDetails";
 import "./MapS.scss";
 import { useMarkers, useMarkersMovement } from "./hooks";
-import { token } from "./token";
 
-mapboxgl.accessToken = token;
+mapboxgl.accessToken =
+    "pk.eyJ1Ijoic2FtLWJyYW5kb24iLCJhIjoiY2xqNHVpMWdnMDUzcTNlcnEwc2FuNjZrYiJ9.-varEhIP7u33KOnsdwaP7g";
 
 export const Map = () => {
     const { map, mapContainer, camControls } = useContext(MapObjectContext);

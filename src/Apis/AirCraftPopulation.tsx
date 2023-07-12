@@ -21,7 +21,7 @@ export const airCraftPopulation = (camControls: CamControls) => {
         {
             icon: angelJetElement(2),
             draggable: true,
-            GPS: [lng + 0.1, lat - 0.3],
+            GPS: [lng + 0.2, lat - 0.3],
             id: 2,
             threatLevel: ThreatLevel.ANGEL,
             rotation: 0,
@@ -37,7 +37,7 @@ export const airCraftPopulation = (camControls: CamControls) => {
         {
             icon: banditJetElement(4),
             draggable: true,
-            GPS: [lng + 0.13, lat],
+            GPS: [lng + 0.13, lat + 0.13],
             id: 4,
             threatLevel: ThreatLevel.BANDIT,
             rotation: 0,
@@ -45,7 +45,7 @@ export const airCraftPopulation = (camControls: CamControls) => {
         {
             icon: banditJetElement(5),
             draggable: true,
-            GPS: [lng + 0.34, lat],
+            GPS: [lng + 0.34, lat + 0.2],
             id: 5,
             threatLevel: ThreatLevel.BANDIT,
             rotation: 0,
@@ -53,7 +53,7 @@ export const airCraftPopulation = (camControls: CamControls) => {
         {
             icon: banditJetElement(6),
             draggable: true,
-            GPS: [lng + 0.21, lat],
+            GPS: [lng + 0.21, lat + 0.2],
             id: 6,
             threatLevel: ThreatLevel.BANDIT,
             rotation: 0,

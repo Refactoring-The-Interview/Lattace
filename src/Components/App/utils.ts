@@ -1,4 +1,5 @@
-import { ThreatLevel } from "../Components/Context/types";
+import * as turf from "@turf/turf";
+import { ThreatLevel } from "../Context/types";
 
 export const getTrackDetailsBtnAttributes = (threatLevel: ThreatLevel) => {
     switch (threatLevel) {
@@ -22,4 +23,22 @@ export const getTrackDetailsBtnAttributes = (threatLevel: ThreatLevel) => {
                 title: "Bogie",
             };
     }
+};
+
+export const getCoordsOfNextPoint = (
+    firstPoint: number[],
+    nextPoint: number[],
+    prevXY = { x: 0, y: 0 }
+) => {
+    const bearing = turf.bearing(firstPoint, nextPoint);
+    const distance = turf.distance(firstPoint, nextPoint, {
+        units: "miles",
+    });
+
+    const xy = {
+        x: prevXY.x + distance * 1000 * Math.cos((bearing * Math.PI) / 180),
+        y: prevXY.y + distance * 1000 * Math.sin((bearing * Math.PI) / 180),
+    };
+
+    return xy;
 };

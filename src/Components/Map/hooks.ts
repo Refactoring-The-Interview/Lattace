@@ -1,9 +1,9 @@
+import * as turf from "@turf/turf";
 import mapboxgl from "mapbox-gl";
 import { useContext, useEffect } from "react";
 import { MapObjectContext } from "../Context/MapObjectContext";
 import { MarkerOptionProps } from "../Context/types";
 
-// reacts to data store changes and writes to the map
 export const useMarkers = () => {
     const { map, markers, mapMarkers } = useContext(MapObjectContext);
 
@@ -18,38 +18,51 @@ export const useMarkers = () => {
                     draggable: draggable,
                 });
 
-                updateNewMarker.setLngLat([GPS[0], GPS[1] + 0.002]);
+                updateNewMarker.setLngLat([GPS[0], GPS[1]]);
                 updateNewMarker.setRotation(rotation);
-
-                // add to our ref store
                 mapMarkers.current[id] = updateNewMarker;
-
-                // add to the map
                 updateNewMarker.addTo(map.current);
             }
         });
     }, [map, mapMarkers, markers]);
 };
 
-// changes the data store for markers to move icon
 export const useMarkersMovement = () => {
-    const { setMarkers } = useContext(MapObjectContext);
+    const { setMarkers, camControls } = useContext(MapObjectContext);
+    const { lat, lng } = camControls;
 
     useEffect(() => {
         setInterval(() => {
             setMarkers((markers) => {
-                const newMarkers = markers.map((marker: MarkerOptionProps) => {
-                    // think state separate from the reactive layer
+                const newMarkers = markers.map(
+                    (marker: MarkerOptionProps, index) => {
+                        const { GPS } = marker;
 
-                    return {
-                        ...marker,
-                        GPS: [marker.GPS[0], marker.GPS[1] + 0.005],
-                        rotation: marker.rotation + 5,
-                    } as MarkerOptionProps;
-                });
+                        const center = [lat, lng];
+                        const radius = 1;
+                        const options = {
+                            steps: 5,
+                        };
+
+                        // need to move the points in a circle
+
+                        const coors = [
+                            turf.circle(center, radius, options)?.geometry
+                                ?.coordinates[0][index][1],
+                            turf.circle(center, radius, options)?.geometry
+                                ?.coordinates[0][index][0],
+                        ] as number[];
+
+                        return {
+                            ...marker,
+                            GPS: coors,
+                            rotation: marker.rotation,
+                        } as MarkerOptionProps;
+                    }
+                );
 
                 return newMarkers;
             });
-        }, 1000);
+        }, 5000);
     }, [setMarkers]);
 };
