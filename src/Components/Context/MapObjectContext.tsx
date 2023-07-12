@@ -1,13 +1,13 @@
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { ReactNode, RefObject, createContext, useRef, useState } from "react";
-
 import { airCraftPopulation } from "../../Apis/AirCraftPopulation";
-import { token } from "../Map/token";
 import { MarkerOptionProps, ThreatLevel } from "./types";
 import { CamControls, useCamControls } from "./useCamControls";
 
-mapboxgl.accessToken = token;
+//public token
+mapboxgl.accessToken =
+    "pk.eyJ1Ijoic2FtLWJyYW5kb24iLCJhIjoiY2xqNHVpMWdnMDUzcTNlcnEwc2FuNjZrYiJ9.-varEhIP7u33KOnsdwaP7g";
 
 interface MapObjectContextValues {
     map: any;

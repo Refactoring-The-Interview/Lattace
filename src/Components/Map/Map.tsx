@@ -7,6 +7,7 @@ import { TrackingDetails } from "../SideBar/TrackingDetails/TrackingDetails";
 import "./MapS.scss";
 import { useMarkers, useMarkersMovement } from "./hooks";
 
+//public token
 mapboxgl.accessToken =
     "pk.eyJ1Ijoic2FtLWJyYW5kb24iLCJhIjoiY2xqNHVpMWdnMDUzcTNlcnEwc2FuNjZrYiJ9.-varEhIP7u33KOnsdwaP7g";
 
