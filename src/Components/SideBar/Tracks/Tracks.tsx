@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { MapObjectContext } from "../../Context/MapObjectContext";
-
 import { DecimalCoordsToDeg } from "../../../Apis/DecimalCoordsToDeg";
 import { MarkerOptionProps } from "../../Context/types";
 import { SearchBar } from "../SearchBar/SearchBar";
@@ -49,6 +48,7 @@ export const Tracks = () => {
                                     <div>
                                         {Math.round(rotation / 10) * 10}°{" "}
                                     </div>
+
                                     <div>1200 m</div>
                                     <div>1000 m/s</div>
                                 </div>
