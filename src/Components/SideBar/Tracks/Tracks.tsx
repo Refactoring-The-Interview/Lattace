@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { MapObjectContext } from "../../Context/MapObjectContext";
-
+import { DecimalCoordsToDeg } from "../../../Apis/DecimalCoordsToDeg";
 import { MarkerOptionProps } from "../../Context/types";
 import { SearchBar } from "../SearchBar/SearchBar";
 import "./TracksS.scss";
@@ -30,6 +30,7 @@ export const Tracks = () => {
                     index: number
                 ) => {
                     const isBandit = threatLevel === 0 ? "bandit" : "angel";
+
                     return (
                         <div
                             className="banner"
@@ -47,8 +48,9 @@ export const Tracks = () => {
                                     <div>
                                         {Math.round(rotation / 10) * 10}°{" "}
                                     </div>
-                                    <div>0 m</div>
-                                    <div>0 m/s</div>
+
+                                    <div>1200 m</div>
+                                    <div>1000 m/s</div>
                                 </div>
                             </div>
                         </div>

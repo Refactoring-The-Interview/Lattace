@@ -7,7 +7,7 @@ import "./TrackingDetailsS.scss";
 
 export const TrackingDetails = () => {
     const { selectedDetails } = useContext(MapObjectContext);
-    const [show, setShow] = useState<boolean>(false);
+    const [show, setShow] = useState<boolean>(true);
 
     if (!selectedDetails) return null;
 
