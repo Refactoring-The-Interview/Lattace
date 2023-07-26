@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { MapObjectContext } from "../../Context/MapObjectContext";
 
+import { MarkerOptionProps } from "../../Context/types";
 import { SearchBar } from "../SearchBar/SearchBar";
 import "./TracksS.scss";
-import { MarkerOptionProps } from "../../Context/types";
 
 export const Tracks = () => {
     const { markers, setSelectedDetails } = useContext(MapObjectContext);
@@ -26,7 +26,7 @@ export const Tracks = () => {
             </div>
             {currentMarkers.map(
                 (
-                    { icon, id, GPS, newMarker, threatLevel }: any,
+                    { icon, id, GPS, newMarker, threatLevel, rotation }: any,
                     index: number
                 ) => {
                     const isBandit = threatLevel === 0 ? "bandit" : "angel";
@@ -44,7 +44,9 @@ export const Tracks = () => {
                                     {isBandit} ( {id} )
                                 </div>
                                 <div className="target-info">
-                                    <div>0° </div>
+                                    <div>
+                                        {Math.round(rotation / 10) * 10}°{" "}
+                                    </div>
                                     <div>0 m</div>
                                     <div>0 m/s</div>
                                 </div>
